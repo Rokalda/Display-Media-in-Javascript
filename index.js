@@ -10,12 +10,12 @@ dp_btn.addEventListener("click",async ()=>{
    let videoStream= await startCapture(displayMediaOptions);
 
     if (videoStream==null){
-       setTimeout()
+   
     }
     else{
       const date = new Date()
-  
-      let streamDisplayName=videoStream.getVideoTracks()[0].getCapabilities().displaySurface;
+      let videoTrack=videoStream.getVideoTracks()[0];
+      let streamDisplayName=videoTrack.getCapabilities().displaySurface;
       
       
         const recorder = new MediaRecorder(videoStream)
@@ -45,7 +45,8 @@ dp_btn.addEventListener("click",async ()=>{
         
         const media_screen= media_display.querySelector(".media_screen")
         
-        const link=
+        const link= media_display.querySelector("a")
+        
         media_screen.muted=true;
         media_screen.srcObject=videoStream;
         video_container.appendChild(media_display)
@@ -67,8 +68,10 @@ dp_btn.addEventListener("click",async ()=>{
               dl.href=URL.createObjectURL(blob);
              dl.download=video_filename;
         }
+
         // This is run when the User stops Sharing their monitor
-         videoStream.getVideoTracks()[0].onended=()=>{
+        
+         videoTrack.onended=()=>{
           video_container.querySelectorAll(".media_display").forEach((md)=>{
             if(md.dataset.videoId==videoStream.id){
               recorder.stop()
@@ -112,3 +115,13 @@ const displayMediaOptions = {
     return captureStream;
   }
   
+// Trying to make a fancy UI with Intersection Observer
+
+
+const observer = new IntersectionObserver(fancySliding);
+
+function fancySliding(entries){
+entries.forEach(el=>{
+  
+})
+}
