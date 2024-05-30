@@ -36,7 +36,7 @@ dp_btn.addEventListener("click",async ()=>{
         const media_display=document.createElement("div");
         media_display.className="media_display";
         media_display.dataset.videoId=videoStream.id;
-
+        
 
         media_display.innerHTML=`	
         <video class="media_screen" ></video>
@@ -46,6 +46,17 @@ dp_btn.addEventListener("click",async ()=>{
         const media_screen= media_display.querySelector(".media_screen")
         
         const link= media_display.querySelector("a")
+       let original_accent= getComputedStyle(link).getPropertyValue("--accent")
+        
+       link.onmouseenter=()=>{
+          getComputedStyle(link).setProperty("--accent","red")
+          link.textContent="Stop Streaming";
+        }
+
+        link.onmouseleave=()=>{
+          getComputedStyle(link).setProperty("--accent",original_accent)
+          link.textContent="Streaming";
+        }
         
         media_screen.muted=true;
         media_screen.srcObject=videoStream;
