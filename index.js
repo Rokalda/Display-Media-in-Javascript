@@ -1,9 +1,12 @@
 
+
+
 const dp_btn=document.querySelector(".dp_btn")
+
 const video_container = document.querySelector(".video_container")
 
 // Ininitializing an Array to keeo track of all The Media Streams being recorded.
-const mediaID_record=[]
+
 dp_btn.addEventListener("click",async ()=>{
     
     
@@ -15,11 +18,18 @@ dp_btn.addEventListener("click",async ()=>{
     else{
       const date = new Date()
       let videoTrack=videoStream.getVideoTracks()[0];
-      let streamDisplayName=videoTrack.getCapabilities().displaySurface;
+      let streamDisplayName="";
+      if("getCapabilities" in videoTrack){
+        streamDisplayName= videoTrack.getCapabilities().displaySurface;
+      }
+      else{
+        streamDisplayName="Screen";
+      }
+     
       
       
         const recorder = new MediaRecorder(videoStream)
-        console.log(recorder)
+       
         let recordedData=[]
         recorder.ondataavailable=(event)=>{
           
@@ -36,21 +46,30 @@ dp_btn.addEventListener("click",async ()=>{
         const media_display=document.createElement("div");
         media_display.className="media_display";
         media_display.dataset.videoId=videoStream.id;
-
+        
 
         media_display.innerHTML=`	
-        <video class="media_screen" ></video>
+        <video class="media_screen" muted autoplay ></video>
         <p class="media_title">${streamDisplayName.toUpperCase()} Recording at ${date.toLocaleDateString()} ${date.toLocaleTimeString()}</p>
         <a class="streaming">Streaming</a>`
         
         const media_screen= media_display.querySelector(".media_screen")
         
         const link= media_display.querySelector("a")
+      
         
-        media_screen.muted=true;
+      
+        link.onclick=()=>{
+          let tracks = videoStream.getTracks()
+          for(let i =0;i<tracks.length;i++){
+            tracks[i].stop()
+          }
+        }
+        
+       
         media_screen.srcObject=videoStream;
         video_container.appendChild(media_display)
-        media_screen.play()
+        media_display.scrollIntoView({behavior:"smooth"})
         
         
         recorder.onstop=()=>{
@@ -72,12 +91,16 @@ dp_btn.addEventListener("click",async ()=>{
         // This is run when the User stops Sharing their monitor
         
          videoTrack.onended=()=>{
-          video_container.querySelectorAll(".media_display").forEach((md)=>{
-            if(md.dataset.videoId==videoStream.id){
-              recorder.stop()
+          link.onmouseenter=null;
+          link.onmouseleave=null;
+          link.onclick=null;
+          recorder.stop()
+          // video_container.querySelectorAll(".media_display").forEach((md)=>{
+          //   if(md.dataset.videoId==videoStream.id){
+          //     recorder.stop()
               
-            }
-          })
+          //   }
+          // })
          
         }
       
@@ -97,10 +120,11 @@ const displayMediaOptions = {
       suppressLocalAudioPlayback: false,
     },
     preferCurrentTab: false,
-    selfBrowserSurface: "exclude",
+    selfBrowserSurface: "include",
     systemAudio: "include",
     surfaceSwitching: "include",
     monitorTypeSurfaces: "include",
+    
   };
   
   async function startCapture(displayMediaOptions) {
@@ -115,13 +139,4 @@ const displayMediaOptions = {
     return captureStream;
   }
   
-// Trying to make a fancy UI with Intersection Observer
 
-
-const observer = new IntersectionObserver(fancySliding);
-
-function fancySliding(entries){
-entries.forEach(el=>{
-  
-})
-}

@@ -3,7 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="./icon.png" type="x/icon">
 	<title>Recording Screen Page</title>
+	
 	
 	<style>
 		body{
@@ -17,6 +19,7 @@
 			row-gap: 20px;
 			padding: 20px 10px;
 			
+			
 		}
 		.dp_btn{
 			--lg:red;
@@ -28,7 +31,7 @@
 			width:300px;
 			border:5px solid transparent;
 			border-image: linear-gradient(var(--deg),var(--lg),var(--rg)) 5 round;
-
+			
 			cursor: pointer;
 			border-radius: 10px;
 			margin: auto;
@@ -36,23 +39,10 @@
 			font-size:32px;
 			background-color: rgb(47, 38, 90);
 			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			animation: 1s linear infinite  rotateBorder; 
+			
 		}
 		
-		@keyframes rotateBorder {
-			0%{
-				
-				--deg:90deg;
-
-			}
-			50%{
-				--deg:360deg;
-			}
-			100%{
-				--deg:90deg;
-			}
-		}
-
+	
 	
 	
 	.video_container h2{
@@ -66,7 +56,7 @@
 		background-color: rgb(3, 63, 63);
 		padding: 20px;
 		column-gap: 10px;
-		transition: all 1s;
+	
 		width: fit-content;
 		margin: auto;
 		margin-bottom: 20px;
@@ -94,6 +84,7 @@
 			margin-right: 20px;
 			text-decoration: none;
 			align-self: center;
+			cursor: pointer;
 			background-color: white;
 		}
 		
@@ -104,6 +95,15 @@
 			font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 			animation: streaming 2s infinite ease-out;
 
+		}
+		.media_display a.streaming:hover{
+			--accent:rgb(216, 35, 35);
+			
+			
+		}
+		.media_display a.streaming:hover::before{
+			content: "Stop ";
+			
 		}
 		@keyframes streaming {
 			0%{
@@ -125,7 +125,10 @@
 		.media_display a.download_link{
 			transition: all 0.2s ease-in;
 			color:red;
+			border:2px solid currentColor;
+			border-radius: 12px;
 			display: flex;
+			font-weight:bold;
 			
 		}
 		.media_display a.download_link::after{
@@ -143,7 +146,7 @@
 			outline-offset: 4px;
 			align-content: flex-start;
 			flex-direction: column-reverse;
-    justify-content: flex-start;
+    		justify-content: flex-start;
 
 		}
 		.media_display a.download_link:hover{
@@ -156,7 +159,7 @@
 <body>
 	<div class="display_box">
 
-		<button class="dp_btn">
+		<button class="dp_btn" >
 			Add Display Recording
 		</button>
 		
