@@ -1,13 +1,16 @@
 
 
 const streamTypes= {screen:"SCREEN",camera:"CAMERA"}
+
 const dp_btn=document.querySelector(".dp_btn")
 const cam_btn = document.querySelector(".cam_btn")
-const video_container = document.querySelector(".video_container")
+const media_container = document.querySelector(".media_container")
 const vid_checkbox=document.getElementById("video")
 const audio_checkbox=document.getElementById("audio");
+
 vid_checkbox.onchange=checkifanyChecked
 audio_checkbox.onchange=checkifanyChecked
+
 function checkifanyChecked(){
 if(vid_checkbox.checked || audio_checkbox.checked){
   cam_btn.disabled=false;
@@ -19,11 +22,11 @@ else{
 // Ininitializing an Array to keeo track of all The Media Streams being recorded.
 
 dp_btn.onclick=async ()=>{
-  await addVideotoStream(streamTypes.screen)
+  await addVideotoStream(streamTypes.screen);
 
 }
 cam_btn.onclick=async ()=>{
-await addVideotoStream(streamTypes.camera)
+await addVideotoStream(streamTypes.camera);
 }
 
 async function addVideotoStream(str_type)  {
@@ -104,7 +107,7 @@ async function addVideotoStream(str_type)  {
        
       
        media_screen.srcObject=videoStream;
-       video_container.appendChild(media_display)
+       media_container.appendChild(media_display)
        media_display.scrollIntoView({behavior:"smooth"})
        
        
@@ -123,6 +126,7 @@ async function addVideotoStream(str_type)  {
              link.href=URL.createObjectURL(blob);
             link.download=video_filename;
        }
+       
 
        // This is run when the User stops Sharing their monitor
        if(videoTrack!=null){
@@ -133,8 +137,7 @@ async function addVideotoStream(str_type)  {
        }
      
      function endRecording(){
-        link.onmouseenter=null;
-          link.onmouseleave=null;
+        
           link.onclick=null;
           recorder.stop()
      }
