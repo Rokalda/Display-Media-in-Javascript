@@ -1,0 +1,214 @@
+
+body{
+    margin: 0;
+    background-color: rgb(71, 66, 66);
+
+}
+.display_box{
+    display: grid;
+    justify-content: center;
+    row-gap: 20px;
+    padding: 20px 10px;
+    
+    
+}
+.btn_con{
+    display: flex;
+    column-gap: 35px;
+    justify-self: center;
+}
+.btn_con button{
+    padding: 10px 14px;
+    transition: background-color  0.3s;
+    color:white;
+    width:300px;
+    border:5px solid transparent;
+    border-image: linear-gradient(var(--deg),var(--lg),var(--rg)) 5 round;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:32px;
+}
+.dp_btn{
+    --lg:red;
+    --rg:orange;
+    --deg:90deg;
+    background-color: rgb(47, 38, 90);
+    
+}
+
+.cam_btn{
+    --lg:rgb(69, 238, 42);
+    --rg:rgb(35, 112, 220);
+    --deg:90deg;
+    background-color: rgb(212, 46, 20);
+}
+.cam_btn:disabled{
+background-color: gray;
+}
+
+
+.video_container h2{
+text-align: center;
+color:white;
+font-family: sans-serif;
+font-size:36px;
+}
+.media_display{
+display: flex;
+background-color: rgb(3, 63, 63);
+padding: 20px;
+column-gap: 10px;
+
+width: fit-content;
+margin: auto;
+margin-bottom: 20px;
+box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
+}
+.media_screen{
+    aspect-ratio: 16/9;
+    width: 300px;
+    background-color: black;
+    
+    
+    
+}
+.media_title{
+    font-family:sans-serif;
+    color:lightgreen;
+    font-size:28px;
+    align-self: center;
+    max-width: 369px;
+}
+.media_display a {
+    font-size:23px;
+    padding: 12px 10px;
+    font-family: sans-serif;
+    margin-right: 20px;
+    text-decoration: none;
+    align-self: center;
+    cursor: pointer;
+    background-color: white;
+}
+
+.media_display a.streaming{
+    --accent:rgb(31, 164, 31);
+    color:var(--accent);
+    letter-spacing: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    animation: streaming 2s infinite ease-out;
+
+}
+.media_display a.streaming:hover{
+    --accent:rgb(216, 35, 35);
+    
+    
+}
+.media_display a.streaming:hover::before{
+    content: "Stop ";
+    
+}
+@keyframes streaming {
+    0%{
+        color:var(--accent);
+        background-color: white;
+
+    }
+    50%{
+        background-color: var(--accent);
+        color:white;
+    }
+    100%{
+        color:var(--accent);
+        background-color: white;
+    }
+
+}
+
+.media_display a.download_link{
+    transition: all 0.2s ease-in;
+    color:red;
+    border:2px solid currentColor;
+    border-radius: 12px;
+    display: flex;
+    font-weight:bold;
+    
+}
+.media_display a.download_link::after{
+    --radius:15px;
+    content: "";
+    display: inline-block;
+    align-self: center;
+    width: var(--radius);
+    height:var(--radius);
+    margin-left: 10px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+    align-content: flex-start;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+
+}
+.media_display a.download_link:hover{
+    background-color: red;
+    color:white;
+
+}
+.choice_box{
+    display: flex;
+    row-gap: 10px;
+    align-self: center;
+    flex-direction: column;
+}
+.choice_box > *{
+    display: inherit;
+    align-items: center;
+    column-gap: 10px;			
+}
+
+.choice_box label{
+    font-size:32px;
+    color:white;
+    
+    /* text-shadow: 1px 1px 1px blue; */
+    font-weight: bold;
+    font-family: sans-serif;
+}
+input[type=checkbox]{
+    transition: background-color 0.1s ease-in;
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+    width: 5rem;
+    aspect-ratio: 3/1.4;
+    
+position: relative;
+    border-radius: 1rem;
+    padding: 2px 4px;
+    
+}
+input[type=checkbox]:checked{
+    background-color: blue;
+
+}
+input[type=checkbox]:checked::after{
+    
+    left:48px;
+    background-color: aliceblue;
+
+}
+input[type=checkbox]::after{
+    content: "";
+    width: 30px;
+    transition: left 0.1s ease-in, background-color 0.2s ease;
+    position: absolute;
+    left:2px;
+    top:4px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: black;
+}
