@@ -120,10 +120,13 @@ async function addVideotoStream(str_type)  {
              const blob = new Blob(recordedData,{type:"video/mp4"})
              let dateString = date.toLocaleDateString().split("/").join("_")
              let timeString = date.toLocaleTimeString().split(":").join("_")
-            
+             let mediaUrl=URL.createObjectURL(blob);
+            media_screen.srcObject=null;
+            media_screen.src=mediaUrl;
+           media_screen.controls=true;
             let video_filename=`${streamDisplayName}Recording_${dateString}-${timeString}.mp4`;
          
-             link.href=URL.createObjectURL(blob);
+             link.href=mediaUrl;
             link.download=video_filename;
        }
        
