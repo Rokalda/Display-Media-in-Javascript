@@ -1,12 +1,13 @@
 
 
 const streamTypes= {screen:"SCREEN",camera:"CAMERA"}
-
+// Querying all of the DOM Elements
 const dp_btn=document.querySelector(".dp_btn")
 const cam_btn = document.querySelector(".cam_btn")
 const media_container = document.querySelector(".media_container")
 const vid_checkbox=document.getElementById("video")
 const audio_checkbox=document.getElementById("audio");
+
 
 vid_checkbox.onchange=checkifanyChecked
 audio_checkbox.onchange=checkifanyChecked
@@ -19,7 +20,7 @@ else{
   cam_btn.disabled=true;
 }
 }
-// Ininitializing an Array to keeo track of all The Media Streams being recorded.
+
 
 dp_btn.onclick=async ()=>{
   await addVideotoStream(streamTypes.screen);
@@ -97,7 +98,7 @@ async function addVideotoStream(str_type)  {
        const link= media_display.querySelector("a")
      
        
-     
+       // End all Tracks by pressing the Stop Streaming Link
        link.onclick=()=>{
          let tracks = videoStream.getTracks()
          for(let i =0;i<tracks.length;i++){
