@@ -2,6 +2,7 @@
 
 const streamTypes= {screen:"SCREEN",camera:"CAMERA"}
 // Querying all of the DOM Elements
+
 const dp_btn=document.querySelector(".dp_btn")
 const cam_btn = document.querySelector(".cam_btn")
 const media_container = document.querySelector(".media_container")
@@ -54,7 +55,7 @@ async function addVideotoStream(str_type)  {
       streamDisplayName="Microhone"
      }
      else if(str_type==streamTypes.camera){
-      streamDisplayName="Camera"
+      streamDisplayName=videoTrack.label;
      }
      else if("getCapabilities" in videoTrack){
         
@@ -65,7 +66,7 @@ async function addVideotoStream(str_type)  {
      else{
        streamDisplayName="Screen";
      }
-    
+   
      
      
        const recorder = new MediaRecorder(videoStream)
@@ -90,7 +91,7 @@ async function addVideotoStream(str_type)  {
 
        media_display.innerHTML=`	
        <video class="media_screen" muted autoplay ></video>
-       <p class="media_title">${streamDisplayName.toUpperCase()} Recording at ${date.toLocaleDateString()} ${date.toLocaleTimeString()}</p>
+       <p class="media_title"><span class="str_name">${streamDisplayName.toUpperCase()}</span> Recording at ${date.toLocaleDateString()} ${date.toLocaleTimeString()}</p>
        <a class="streaming">Streaming</a>`
        
        const media_screen= media_display.querySelector(".media_screen")

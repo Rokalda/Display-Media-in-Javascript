@@ -68,6 +68,7 @@ h1{
 }
 
 .cam_btn{
+    
     --lg:rgb(69, 238, 42);
     --rg:rgb(35, 112, 220);
     --deg:90deg;
@@ -75,6 +76,9 @@ h1{
 }
 .cam_btn:disabled{
 background-color: gray;
+cursor:default;
+--lg:white;
+--rg:white;
 }
 
 
@@ -111,6 +115,12 @@ box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
     font-size:28px;
     align-self: center;
     max-width: 369px;
+}
+.str_name{
+    font-weight: bold;
+    color: #ff3d3d;
+    font-family: monospace;
+    font-size:110%;
 }
 .media_display a {
     font-size:23px;
@@ -209,12 +219,14 @@ box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
     transition: color 0.3s ease-in;
     /* text-shadow: 1px 1px 1px blue; */
     font-weight: bold;
+    cursor: pointer;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 input[type=checkbox]{
     transition: background-color 0.1s ease-in;
     appearance: none;
+    outline: 2px solid beige;
     background-color: white;
     cursor: pointer;
     width: 5rem;
@@ -232,7 +244,7 @@ input[type=checkbox]:checked{
 
 }
 input[type=checkbox]:checked+ label{
-    
+   
     color:rgb(38, 255, 0);
 }
 input[type=checkbox]::after{
