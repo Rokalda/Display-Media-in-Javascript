@@ -90,6 +90,19 @@ font-size:42px;
 
 text-transform: uppercase;
 }
+.media_container h2 button{
+    border:none;
+    outline: 2px solid blue;
+    border-radius: 5px;
+    font-size:23px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    padding:5px 10px;
+    background-color: aliceblue;
+    color:blue;
+
+}
+
 .media_display{
 display: flex;
 background-color: rgb(3, 63, 63);
@@ -167,7 +180,7 @@ box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
 
 }
 
-.media_display a.download_link{
+.download_link{
     transition: all 0.2s ease-in;
     color:red;
     border:2px solid currentColor;
@@ -177,7 +190,7 @@ box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
     font-weight:bold;
     
 }
-.media_display a.download_link::after{
+ .download_link::after{
     --radius:15px;
     content: "";
     display: inline-block;
@@ -195,7 +208,7 @@ box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
     justify-content: flex-start;
 
 }
-.media_display a.download_link:hover{
+.download_link:hover{
     background-color: red;
     box-shadow: none;
     color:white;

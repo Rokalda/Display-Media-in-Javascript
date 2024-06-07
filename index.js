@@ -31,6 +31,21 @@ cam_btn.onclick=async ()=>{
 await addVideotoStream(streamTypes.camera);
 }
 
+const update_ui=()=>{
+  let md_dsiplays=media_container.querySelectorAll(".media_display")
+  let h2 =  document.querySelector(".media_container h2");
+  if(md_dsiplays.length==2){
+    
+    h2.innerHTML+=`<button >Download all Finished Recordings</button>`
+    h2.children[0].onclick=()=>{
+      document.querySelectorAll("a.download_link").forEach((a)=>a.click())
+    }
+  }
+  else if(md_dsiplays.length <2 && h2.children.length==1 ){
+    h2.removeChild(media_container.lastElementChild)
+  }
+ 
+}
 async function addVideotoStream(str_type)  {
     
   let videoStream;
@@ -52,7 +67,7 @@ async function addVideotoStream(str_type)  {
      let streamDisplayName="";
      if(videoTrack==null){
       
-      streamDisplayName="Microhone"
+      streamDisplayName=audioTrack.label;
      }
      else if(str_type==streamTypes.camera){
       streamDisplayName=videoTrack.label;
@@ -99,7 +114,7 @@ async function addVideotoStream(str_type)  {
        const link= media_display.querySelector("a")
      
        
-       // End all Tracks by pressing the Stop Streaming Link
+       // End all Media Tracks by pressing the Stop Streaming Link
        link.onclick=()=>{
          let tracks = videoStream.getTracks()
          for(let i =0;i<tracks.length;i++){
@@ -110,6 +125,7 @@ async function addVideotoStream(str_type)  {
       
        media_screen.srcObject=videoStream;
        media_container.appendChild(media_display)
+       update_ui()
        media_display.scrollIntoView({behavior:"smooth"})
        
        
@@ -120,8 +136,8 @@ async function addVideotoStream(str_type)  {
              link.textContent="Download Recording";
 
              const blob = new Blob(recordedData,{type:"video/mp4"})
-             let dateString = date.toLocaleDateString().split("/").join("_")
-             let timeString = date.toLocaleTimeString().split(":").join("_")
+             let dateString = date.toLocaleDateString()
+             let timeString = date.toLocaleTimeString()
              let mediaUrl=URL.createObjectURL(blob);
             media_screen.srcObject=null;
             media_screen.src=mediaUrl;
@@ -187,9 +203,39 @@ async function startCameraCapture(){
   try {
     cap_stream = await navigator.mediaDevices.getUserMedia({video:vid_checkbox.checked,audio:audio_checkbox.checked});
   } catch (err) {
-    console.error(`Error: ${err}`);
+    if(err.name=="NotFoundError"){
+      let has_vid_device=false;
+      let has_audio_device=false;
+     const devices= await navigator.mediaDevices.enumerateDevices()
+
+        devices.forEach((d)=>{
+          if(d.kind=="videoinput"){
+            has_vid_device=true;
+          }
+          else if(d.kind=="audioinput"){
+            has_audio_device=true;
+          }
+
+        })
+        let missing_device_message=""
+        if(has_vid_device==false && has_audio_device == false){
+          missing_device_message="No Micorphone or Camera can been found"
+        }
+        else if(has_vid_device==false){
+          missing_device_message="No Camera can be found"
+        }
+        else{
+          missing_device_message="No Microphone has been found"
+        }
+        alert(missing_device_message)
+    }
+     
+      console.error({err});
+    }
+   
+    return cap_stream;
   }
-  return cap_stream;
-}
+ 
+
 
 
