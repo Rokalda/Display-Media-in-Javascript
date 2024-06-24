@@ -193,7 +193,7 @@ const displayMediaOptions = {
       captureStream =
         await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
     } catch (err) {
-      console.error(`Error: ${err}`);
+      alert(`Error: ${err}`);
     }
     return captureStream;
   }
@@ -230,7 +230,7 @@ async function startCameraCapture(){
         alert(missing_device_message)
     }
      
-      console.error({err});
+      alert(err);
     }
    
     return cap_stream;
