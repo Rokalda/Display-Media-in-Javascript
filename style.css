@@ -17,19 +17,26 @@ h1{
 }
 
 .display_box{
-    display: grid;
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    /* display: grid;
     justify-content: center;
     row-gap: 20px;
-    padding: 20px 10px;
+
+    padding: 20px 10px; */
     
     
 }
 .btn_con{
     display: flex;
     column-gap: 35px;
+    row-gap: 20px;
     position: sticky;
     top:20px;
-    height: 150px;
+    flex-wrap: wrap;
+    justify-content: center;
+   
     z-index: 2;
     justify-self: center;
 }
@@ -49,14 +56,16 @@ h1{
     padding-block: 10px;
     transition: background-color  0.3s;
     color:white;
-    width:300px;
+    max-width:300px;
+    width: 90%;
     border:5px solid transparent;
     border-image: linear-gradient(var(--deg),var(--lg),var(--rg))  1 round;
     cursor: pointer;
     
     margin: auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size:32px;
+    font-size: 32px;
+    /* font-size:min(32px,150%); */
 }
 
 .dp_btn{
@@ -273,7 +282,20 @@ input[type=checkbox]::after{
 }
 input[type=checkbox]:checked::after{
     
-    left:48px;
+    left:45px;
     background-color: aliceblue;
 
+}
+
+@media (width<=400px)  {
+    .btn_con button{
+        font-size: 21px;
+    }
+    .btn_con.stuck{
+        background-color: rgba(0, 0, 0, 0.382);
+    }
+
+    .media_display{
+        flex-wrap: wrap;
+    }
 }
