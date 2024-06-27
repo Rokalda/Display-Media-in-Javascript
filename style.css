@@ -118,7 +118,7 @@ background-color: rgb(3, 63, 63);
 padding: 20px;
 column-gap: 10px;
 
-width: fit-content;
+width: max-content;
 margin: auto;
 margin-bottom: 20px;
 box-shadow:5px 5px 10px 10px hsl(135, 6%, 28%);
